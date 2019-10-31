@@ -1,0 +1,115 @@
+https://www.cyberciti.biz/faq/howto-find-a-directory-linux-command/
+
+How to find a directory on Linux
+================================
+The find command syntax is:
+find /where/to/look/up criteria action
+
+OR
+find /dir/path/look/up criteria action
+
+OR
+find /dir/path/look/up -name "dir-name-here"
+
+OR
+find /dir/path/look/up -name "pattern"
+
+OR
+find /dir/path/look/up -name "dir-name-here" -print
+
+OR
+find /dir/path/look/up -name "dir-name-here"
+
+OR
+find / -name "dir-name-here"
+
+OR
+find / -type d -name "dir-name-here"
+
+OR
+find / -type d -name "dir-name-here" 2>/dev/null
+
+Linux find directory command
+The following example will show all files in the current directory and all subdirectories:
+
+find 
+find .
+find . -print
+Finding a directory
+To find a directory called apt in / (root) file system, enter:
+
+Alert: When searching / (root) file system, you need to run the find command as root user.
+
+find / -type d -name "apt" 
+sudo find / -type d -name "apt"
+Sample outputs:
+
+/var/log/apt
+/var/lib/apt
+/var/cache/apt
+/etc/apt
+/etc/logrotate.d/apt
+/etc/cron.daily/apt
+Dealing with “Permission denied error messages” on Linux
+Find will show an error message for each directory/file on which you don’t have read permission
+Find will show an error message for each directory/file on which you don’t have read permission
+
+To avoid those messages, append 2>/dev/null at the end of each command:
+find /where/to/look/ criteria action 2>/dev/null
+sudo find / -type d -name "apt" 2>/dev/null
+How to find a directory named Documents on Linux?
+Type the following command to search for Documents directory in your $HOME dir:
+$ find $HOME -type d -name Documents
+
+Sample outputs:
+
+/home/vivek/Documents
+Getting a detailed list of files/dirs
+Pass the -ls to list current file in ls command output format:
+
+find  / -name "apt" -ls
+Sample outputs:
+
+4719035    4 drwxr-xr-x   2 root     root         4096 Aug 22 06:25 /var/log/apt
+4718597    4 drwxr-xr-x   5 root     root         4096 Aug  4 13:46 /var/lib/apt
+4718601    4 drwxr-xr-x   3 root     root         4096 Aug  8 09:37 /var/cache/apt
+917524    4 drwxr-xr-x   6 root     root         4096 Jun 18 02:28 /etc/apt
+917721    4 -rw-r--r--   1 root     root          173 Apr 15  2011 /etc/logrotate.d/apt
+918762   16 -rwxr-xr-x   1 root     root        14985 Mar 14 12:48 /etc/cron.daily/apt
+How do I list only directories?
+Just find directories and skip file names pass the -type d option as follows:
+
+find  / -type d -name "apt" -ls
+Sample outputs:
+
+4719035    4 drwxr-xr-x   2 root     root         4096 Aug 22 06:25 /var/log/apt
+4718597    4 drwxr-xr-x   5 root     root         4096 Aug  4 13:46 /var/lib/apt
+4718601    4 drwxr-xr-x   3 root     root         4096 Aug  8 09:37 /var/cache/apt
+917524    4 drwxr-xr-x   6 root     root         4096 Jun 18 02:28 /etc/apt
+How do I perform a case insensitive search?
+Replace -name option with -iname as follows:
+
+find  / -type d -iname "apt" -ls
+OR
+
+find  / -type d -iname "apt"
+The patterns ‘apt’ match the directory names ‘apt’, ‘APT’, ‘Apt’, ‘apT’, etc.
+
+How do I find a directory called project.images?
+Type any one of the following command:
+
+find  / -type d -iname "project.images" -ls
+OR
+
+find  / -type d -name "project.images" -ls
+OR
+
+find  / -type d -name "project.images"
+It is also possible to use the wild cards as follows:
+
+find  / -type d -name "project.*"
+find  /dir/to/search/ -type d -name "project.image??"
+A note about locate command
+To search for a file/dir named exactly project.images (not *project.images*), type:
+
+locate -b '\project.images'
